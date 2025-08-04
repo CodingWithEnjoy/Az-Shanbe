@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Az Shanbe</title>
     <link rel="manifest" href="./manifest.json" />
-    <link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -62,13 +62,13 @@
     <div id="app" class="hidden">
       <!-- Pages -->
       <div id="homePage" class="page active">
-        <div class="homeHeader">
-          <div class="user-section">
-            <p>سلام 👋</p>
-            <span id="userDisplay"></span>
-            <div class="layer"></div>
-          </div>
+        <div class="user-section">
+          <p>سلام</p>
+          <span id="userDisplay"></span>
+          <p>👋</p>
+        </div>
 
+        <div class="homeProgress">
           <div id="progressContainer">
             <div class="circular-progress">
               <svg>
@@ -77,6 +77,11 @@
               </svg>
               <div class="progress-value" id="progressLabel">0%</div>
             </div>
+          </div>
+
+          <div id="taskInfo">
+            <p id="pendingCount"></p>
+            <p id="taskMessage"></p>
           </div>
         </div>
 
@@ -101,6 +106,12 @@
         <p>هر کاری دلت میخواد بکن.</p>
 
         <div class="settings-buttons">
+          <button id="changeProfileBtn" class="settings-btn">
+            <img src="icons/image.svg" alt="" /> تغییر عکس پروفایل
+          </button>
+          <button id="changeBannerBtn" class="settings-btn">
+            <img src="icons/image.svg" alt="" /> تغییر بنر
+          </button>
           <button id="btnAppearance" class="settings-btn">
             <img src="icons/settings.svg" alt="" /> ظاهر برنامه
           </button>
@@ -184,14 +195,18 @@
             <p>نسخه برنامه: 1.0.0</p>
             <p>این برنامه توسط تیم "از شنبه" ساخته شده است.</p>
           </div>
+
+          <div id="imageSelectModal" class="panel-content hidden">
+            <h3 id="imageSelectTitle">انتخاب تصویر</h3>
+            <div class="image-options" id="imageOptions"></div>
+          </div>
         </div>
       </div>
 
       <div id="profilePage" class="page hidden">
         <div class="profileImage">
-          <img src="./profile.jpg" alt="" class="profile" />
-          <div class="bannerOverlay"></div>
-          <img src="./banner.jpg" alt="" class="banner" />
+          <img src="profiles/profile1.jpg" alt="" class="profile" />
+          <img src="banners/banner1.jpg" alt="" class="banner" />
           <div class="overlay2 hidden"></div>
         </div>
 

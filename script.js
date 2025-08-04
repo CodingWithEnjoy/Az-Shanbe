@@ -222,6 +222,34 @@ function loadTasks() {
   });
 
   updateProgressChart(doneCount, tasks.length);
+  updateTaskInfo(doneCount, tasks.length);
+}
+
+function updateTaskInfo(done, total) {
+  const pending = total - done;
+  const pendingCountEl = document.getElementById("pendingCount");
+  const messageEl = document.getElementById("taskMessage");
+
+  pendingCountEl.textContent = `${pending} کار باقی مونده`;
+
+  const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+  let message = "";
+
+  if (total === 0) {
+    message = "بیکاری ؟ 🤨";
+  } else if (percent === 100) {
+    message = "یوووووووووو !!!! 🔥";
+  } else if (percent >= 75) {
+    message = "یکم مونده فقط 🤏";
+  } else if (percent >= 50) {
+    message = "نصفش رفتههه ✨";
+  } else if (percent >= 25) {
+    message = "هنوز اول راهی ☹️";
+  } else {
+    message = "هنوز کاری نکردی 🤬";
+  }
+
+  messageEl.textContent = message;
 }
 
 // ✏️ Start editing task
@@ -536,47 +564,142 @@ editModal.addEventListener("click", (event) => {
   }
 });
 
-// Elements
-const btnAppearance = document.getElementById("btnAppearance");
-const btnAbout = document.getElementById("btnAbout");
-const slidePanel = document.getElementById("slidePanel");
-const closePanelBtn = document.getElementById("closePanelBtn");
-const appearanceContent = document.getElementById("appearanceContent");
-const aboutContent = document.getElementById("aboutContent");
+document.addEventListener("DOMContentLoaded", () => {
+  // Elements
+  const btnAppearance = document.getElementById("btnAppearance");
+  const btnAbout = document.getElementById("btnAbout");
+  const slidePanel = document.getElementById("slidePanel");
+  const closePanelBtn = document.getElementById("closePanelBtn");
+  const appearanceContent = document.getElementById("appearanceContent");
+  const aboutContent = document.getElementById("aboutContent");
+  const imageSelectModal = document.getElementById("imageSelectModal");
+  const imageOptions = document.getElementById("imageOptions");
+  const imageSelectTitle = document.getElementById("imageSelectTitle");
 
-function openPanel(content) {
-  // Show slide panel
-  slidePanel.classList.remove("hidden");
-  setTimeout(() => {
-    slidePanel.classList.add("show");
-  }, 10);
+  const changeProfileBtn = document.getElementById("changeProfileBtn");
+  const changeBannerBtn = document.getElementById("changeBannerBtn");
 
-  // Show correct content
-  if (content === "appearance") {
-    appearanceContent.classList.remove("hidden");
-    aboutContent.classList.add("hidden");
-  } else if (content === "about") {
-    aboutContent.classList.remove("hidden");
+  const profileImg = document.querySelector(".profile");
+  const bannerImg = document.querySelector(".banner");
+
+  const defaultProfileImages = [
+    "profiles/profile1.jpg",
+    "profiles/profile2.jpg",
+    "profiles/profile3.jpg",
+    "profiles/profile4.jpg",
+    "profiles/profile5.jpg",
+    "profiles/profile6.jpg",
+  ];
+  const defaultBannerImages = [
+    "banners/banner1.jpg",
+    "banners/banner2.jpg",
+    "banners/banner3.jpg",
+    "banners/banner4.jpg",
+    "banners/banner5.jpg",
+  ];
+
+  // Open slide panel with specified content
+  function openPanel(content) {
+    slidePanel.classList.remove("hidden");
+    setTimeout(() => slidePanel.classList.add("show"), 10);
+
     appearanceContent.classList.add("hidden");
+    aboutContent.classList.add("hidden");
+    imageSelectModal.classList.add("hidden");
+    imageSelectModal.classList.remove("open");
+
+    if (content === "appearance") {
+      appearanceContent.classList.remove("hidden");
+    } else if (content === "about") {
+      aboutContent.classList.remove("hidden");
+    }
   }
-}
 
-function closePanel() {
-  slidePanel.classList.remove("show");
-  setTimeout(() => {
-    slidePanel.classList.add("hidden");
-  }, 300);
-}
+  // Close slide panel
+  function closePanel() {
+    slidePanel.classList.remove("show");
+    setTimeout(() => slidePanel.classList.add("hidden"), 300);
+  }
 
-// Button event listeners
-btnAppearance.addEventListener("click", () => openPanel("appearance"));
-btnAbout.addEventListener("click", () => openPanel("about"));
-closePanelBtn.addEventListener("click", closePanel);
+  // Open image selector
+  function openImageSelector(type) {
+    imageOptions.innerHTML = "";
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('https://codingwithenjoy.github.io/Az-Shanbe/sw.js')
-      .then(reg => console.log('SW registered:', reg.scope))
-      .catch(err => console.error('SW registration failed:', err));
+    const images =
+      type === "profile" ? defaultProfileImages : defaultBannerImages;
+    imageSelectTitle.textContent =
+      type === "profile" ? "انتخاب عکس پروفایل" : "انتخاب بنر";
+
+    images.forEach((src) => {
+      const img = document.createElement("img");
+      img.src = `./${src}`;
+      img.className = "selectable-image";
+
+      img.addEventListener("click", () => {
+        if (type === "profile") {
+          localStorage.setItem("profileImage", src);
+          profileImg.src = `./${src}`;
+        } else {
+          localStorage.setItem("bannerImage", src);
+          bannerImg.src = `./${src}`;
+        }
+        closeImageSelector();
+      });
+
+      imageOptions.appendChild(img);
+    });
+
+    openPanel(); // make sure panel is open
+    imageSelectModal.classList.remove("hidden");
+    requestAnimationFrame(() => imageSelectModal.classList.add("open"));
+  }
+
+  // Close image selector
+  function closeImageSelector() {
+    imageSelectModal.classList.remove("open");
+    imageSelectModal.addEventListener("transitionend", function handler(e) {
+      if (e.propertyName === "opacity") {
+        imageSelectModal.classList.add("hidden");
+        imageSelectModal.removeEventListener("transitionend", handler);
+      }
+    });
+  }
+
+  // Load saved images from localStorage
+  function applySavedImages() {
+    const savedProfile = localStorage.getItem("profileImage");
+    const savedBanner = localStorage.getItem("bannerImage");
+
+    if (savedProfile) {
+      profileImg.src = `./${savedProfile}`;
+    }
+
+    if (savedBanner) {
+      bannerImg.src = `./${savedBanner}`;
+    }
+  }
+
+  // Event Listeners
+  btnAppearance.addEventListener("click", () => openPanel("appearance"));
+  btnAbout.addEventListener("click", () => openPanel("about"));
+  closePanelBtn.addEventListener("click", closePanel);
+
+  changeProfileBtn.addEventListener("click", () =>
+    openImageSelector("profile")
+  );
+  changeBannerBtn.addEventListener("click", () => openImageSelector("banner"));
+
+  window.addEventListener("load", () => {
+    applySavedImages();
   });
-}
+
+  // Service worker
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then((reg) => console.log("SW registered:", reg.scope))
+        .catch((err) => console.error("SW registration failed:", err));
+    });
+  }
+});
