@@ -1,0 +1,780 @@
+@font-face {
+  font-family: "estedad";
+  src: url("./estedad.woff2") format("woff2");
+}
+
+:root {
+  --primary: var(--theme1); /* default set from primary themes */
+  --secondary: #714dd9;
+
+  --theme1: #ececec;
+  --theme2: #fef4ec;
+  --theme3: #e6f7f7;
+  --theme4: #fffbe7;
+  --theme5: #f0e6ff;
+
+  --secondary1: #714dd9; /* purple */
+  --secondary2: #ff5722; /* deep orange */
+  --secondary3: #009688; /* teal */
+  --secondary4: #ffc107; /* amber */
+  --secondary5: #673ab7; /* deep purple */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "estedad";
+  box-sizing: border-box;
+}
+
+body {
+  direction: rtl;
+  background: var(--primary);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+a,
+button,
+input,
+textarea {
+  all: unset;
+}
+
+.page {
+  display: none;
+  width: 100%;
+}
+
+.page.active {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Onboarding Screens */
+
+.swiper {
+  width: 100%;
+  height: 100vh;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0; /* Prevent shrinking if in flex container */
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 90%;
+}
+
+.swiper-slide img {
+  background: var(--secondary);
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+}
+
+.swiper-slide h2,
+.swiper-slide p {
+  padding: 0px 20px;
+  text-align: justify;
+}
+
+.swiper-slide h2 {
+  margin-top: 40px;
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.swiper-slide p {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.swiper-slide input {
+  width: 80%;
+  margin: 20px;
+  outline: none;
+  border: 1px solid rgb(147, 147, 147);
+  border-radius: 100px;
+  padding: 15px 20px;
+  background: #cfcfcf;
+}
+
+.swiper-slide button {
+  width: 15%;
+  margin: 0 20px;
+  outline: none;
+  border: 1px solid #392182;
+  border-radius: 100px;
+  padding: 10px 20px;
+  background: var(--secondary);
+  color: white;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  background: gray;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgb(0, 0, 0) !important;
+  width: 20px !important;
+  border-radius: 100px !important;
+}
+
+/* App UI */
+
+#app {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#taskInput {
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  direction: rtl;
+  text-align: right;
+}
+
+#todoList {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.todo-item {
+  background: white;
+  width: 100%;
+  padding: 20px;
+  margin: 7px 0;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: right;
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-item.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-item strong {
+  font-size: 22px;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.todo-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#progressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 30px;
+  padding: 30px 20px;
+  width: 200px;
+  height: 200px;
+  font-size: 20px;
+  margin: auto;
+}
+
+.circular-progress {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.circular-progress svg {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+
+.circular-progress circle {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+.circular-progress circle:first-child {
+  stroke: var(--primary, #eee);
+}
+
+.circular-progress #progressCircle {
+  stroke: var(--secondary, #4caf50);
+  stroke-dasharray: 377; /* 2πr = 2 * π * 60 ≈ 377 */
+  stroke-dashoffset: 377;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.user-section {
+  width: 50%;
+  height: 200px;
+  padding: 12px;
+  background: url(profile.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 30px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.user-section p,
+.user-section span {
+  z-index: 4;
+}
+
+.user-section p {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.user-section span {
+  color: var(--secondary);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.user-section .layer {
+  position: absolute;
+  width: 44%;
+  height: 200px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 3;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  gap: 10px;
+  direction: rtl;
+  padding: 32px 20px;
+}
+
+.bottom-nav .nav-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 40px;
+  padding: 8px;
+  transition: color 0.3s ease, border-top-color 0.3s ease;
+  border-top: 2px solid transparent;
+  user-select: none;
+}
+
+.bottom-nav .nav-btn.active,
+.bottom-nav .nav-btn:hover {
+  color: var(--secondary);
+  font-weight: bold;
+}
+
+.plus-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  background-color: var(--secondary);
+  color: white;
+  font-size: 32px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  top: -20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.task-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 70vh;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 1009;
+  overflow-y: auto;
+  padding: 15px;
+  border-radius: 20px 20px 0 0;
+}
+
+.task-drawer h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.task-drawer.open {
+  transform: translateY(0);
+}
+
+/* When hidden, slide it down */
+#taskDrawer.hidden {
+  transform: translateY(100%);
+  pointer-events: none;
+  /* do not use display:none */
+}
+
+.task-drawer .drawer-content input,
+.task-drawer .drawer-content textarea,
+.task-drawer .drawer-content select,
+.task-drawer .drawer-content button {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  direction: rtl;
+  text-align: right;
+}
+
+.task-drawer .drawer-content textarea {
+  resize: none;
+  height: 70px;
+}
+
+.task-drawer .drawer-content button {
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Show custom date input only when needed */
+#customDate.hidden {
+  display: none !important;
+}
+
+/* Overlay styles for fade in/out */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1008;
+}
+
+#overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#profilePage h2 {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 26px;
+}
+
+.profileImage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profileImage .banner {
+  width: 100%;
+  height: 120px;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.bannerOverlay {
+  width: 90%;
+  height: 120px;
+  border-radius: 30px;
+  backdrop-filter: blur(3px);
+  position: absolute;
+}
+
+.profileImage .profile {
+  width: 120px;
+  background: var(--primary);
+  padding: 7px;
+  top: 80px;
+  z-index: 1001;
+  position: absolute;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.profile.expanded {
+  position: fixed;
+  width: 90%;
+  height: auto;
+  max-height: 90vh;
+  z-index: 1001;
+  border-radius: 20px;
+  background: transparent;
+  padding: 0;
+  margin-top: 100px;
+}
+
+.overlay2 {
+  position: fixed;
+  inset: 0;
+  /* background: rgba(0, 0, 0, 0.8 ); */
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.overlay2.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-picker {
+  margin-top: 20px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.color-btn,
+.secondary-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #999;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.color-btn:hover,
+.secondary-btn:hover {
+  transform: scale(1.1);
+}
+
+#noteForm {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#noteForm input,
+#noteForm textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  direction: rtl;
+  text-align: right;
+}
+
+#noteForm button {
+  background: var(--secondary);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#notesList {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.note-item {
+  background: white;
+  border-radius: 20px;
+  padding: 15px;
+  position: relative;
+}
+
+.note-item h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.note-item p {
+  font-size: 16px;
+}
+
+.note-actions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.note-actions button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.profile-actions button {
+  padding: 13px 20px;
+  width: 90%;
+  border-radius: 12px;
+  background: #fff;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 20px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-content input {
+  margin: 20px 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: none;
+  background: var(--secondary);
+  color: white;
+  cursor: pointer;
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal.open .modal-content {
+  transform: scale(1);
+}
+
+.settings-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.settings-btn {
+  padding: 13px 20px;
+  width: 90%;
+  border-radius: 12px;
+  background: #fff;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* Slide panel container */
+.slide-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 85%;
+  height: 100vh;
+  background: white;
+  box-shadow: -3px 0 20px rgb(0 0 0 / 23%);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+  direction: rtl;
+  overflow-y: auto;
+}
+
+/* Show panel by sliding in */
+.slide-panel.show {
+  transform: translateX(0);
+}
+
+/* Close button */
+.close-panel {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* Panel content */
+.panel-content {
+  margin-top: 2.5rem;
+}
+
+.slide-panel h3 {
+  margin-top: -36px;
+  margin-bottom: 50px;
+}

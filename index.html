@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Az Shanbe</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <!-- Onboarding / Welcome -->
+    <div id="welcome">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="1.webp" alt="" />
+            <h2>به "ازشنبه" خوش اومدی !</h2>
+            <p>
+              همه‌مون یه عالمه کار داریم، ولی همیشه می‌گیم: «از شنبه شروع
+              می‌کنم!» حالا وقتشه که این «شنبه» رو جدی بگیریم!
+            </p>
+          </div>
+          <div class="swiper-slide">
+            <img src="1.webp" alt="" />
+            <h2>کارهات رو با ما بساز!</h2>
+            <p>
+              یه جای امن برای لیست کردن همه‌ی کارایی که مدام یادمون می‌ره. دیگه
+              لازم نیست استرس «فراموشی از شنبه» داشته باشی!
+            </p>
+          </div>
+          <div class="swiper-slide">
+            <img src="1.webp" alt="" />
+            <h2>با «از شنبه» آسون‌تر می‌شی!</h2>
+            <p>
+              کارهات رو مدیریت کن و حس خوب انجام دادن رو تجربه کن. از شنبه دیگه
+              فقط یه بهونه نیست!
+            </p>
+          </div>
+          <div class="swiper-slide">
+            <img src="1.webp" alt="" />
+            <h2>اسم خودتو وارد کن و شروع کن!</h2>
+            <p>بی‌خیال بهونه‌ها، از شنبه شروع می‌کنیم!</p>
+            <input
+              type="text"
+              id="username"
+              placeholder="اسم خودتو وارد کن"
+              autocomplete="off"
+            />
+            <button onclick="startApp()">شروع</button>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="hidden">
+      <!-- Pages -->
+      <div id="homePage" class="page active">
+        <div class="homeHeader">
+          <div class="user-section">
+            <p>سلام 👋</p>
+            <span id="userDisplay"></span>
+            <div class="layer"></div>
+          </div>
+
+          <div id="progressContainer">
+            <div class="circular-progress">
+              <svg>
+                <circle cx="70" cy="70" r="60" />
+                <circle id="progressCircle" cx="70" cy="70" r="60" />
+              </svg>
+              <div class="progress-value" id="progressLabel">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="todoList"></div>
+      </div>
+
+      <div id="notesPage" class="page hidden">
+        <h2>یادداشت‌ها</h2>
+        <p>اینجا می‌تونی یادداشت‌هات رو بنویسی و نگه داری.</p>
+
+        <div id="noteForm">
+          <input type="text" id="noteTitle" placeholder="عنوان یادداشت" />
+          <textarea id="noteContent" placeholder="متن یادداشت..."></textarea>
+          <button id="saveNoteBtn">ثبت یادداشت</button>
+        </div>
+
+        <div id="notesList"></div>
+      </div>
+
+      <div id="settingsPage" class="page hidden">
+        <h2>تنظیمات</h2>
+        <p>هر کاری دلت میخواد بکن.</p>
+
+        <div class="settings-buttons">
+          <button id="btnAppearance" class="settings-btn">
+            <img src="icons/settings.svg" alt="" /> ظاهر برنامه
+          </button>
+          <button id="btnAbout" class="settings-btn">
+            <img src="icons/info.svg" alt="" /> درباره برنامه
+          </button>
+        </div>
+
+        <div id="slidePanel" class="slide-panel hidden">
+          <button id="closePanelBtn" class="close-panel">
+            <img src="icons/left.svg" alt="" />
+          </button>
+
+          <div id="appearanceContent" class="panel-content hidden">
+            <h3>ظاهر برنامه</h3>
+            <div class="theme-picker">
+              <p>رنگ پس‌زمینه رو انتخاب کن:</p>
+              <div class="color-options">
+                <button
+                  class="color-btn"
+                  data-color="theme1"
+                  style="background: var(--theme1)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme2"
+                  style="background: var(--theme2)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme3"
+                  style="background: var(--theme3)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme4"
+                  style="background: var(--theme4)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme5"
+                  style="background: var(--theme5)"
+                ></button>
+              </div>
+            </div>
+
+            <div class="theme-picker">
+              <p>رنگ اصلی رو انتخاب کن:</p>
+              <div class="color-options">
+                <button
+                  class="secondary-btn"
+                  data-color="secondary1"
+                  style="background: var(--secondary1)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary2"
+                  style="background: var(--secondary2)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary3"
+                  style="background: var(--secondary3)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary4"
+                  style="background: var(--secondary4)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary5"
+                  style="background: var(--secondary5)"
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <div id="aboutContent" class="panel-content hidden">
+            <h3>درباره برنامه</h3>
+            <p>نسخه برنامه: 1.0.0</p>
+            <p>این برنامه توسط تیم "از شنبه" ساخته شده است.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="profilePage" class="page hidden">
+        <div class="profileImage">
+          <img src="./profile.jpg" alt="" class="profile" />
+          <div class="bannerOverlay"></div>
+          <img src="./banner.jpg" alt="" class="banner" />
+          <div class="overlay2 hidden"></div>
+        </div>
+
+        <h2 id="profileName"></h2>
+
+        <div class="profile-actions">
+          <button id="editNameBtn">
+            <img src="icons/edit.svg" alt="" /> ویرایش نام
+          </button>
+          <button id="logoutBtn">
+            <img src="icons/logout.svg" alt="" /> خروج
+          </button>
+        </div>
+
+        <!-- Edit Name Modal -->
+        <div id="editModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>ویرایش نام</h3>
+            <input
+              type="text"
+              id="newNameInput"
+              placeholder="نام جدید رو وارد کن"
+            />
+            <div class="modal-buttons">
+              <button id="saveNameBtn">ذخیره</button>
+              <button id="cancelEditBtn">لغو</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay for drawer -->
+      <div id="overlay" class="hidden"></div>
+
+      <!-- Drawer container for task inputs -->
+      <div id="taskDrawer" class="task-drawer hidden">
+        <div class="drawer-content">
+          <h3>افزودن وظیفه جدید</h3>
+          <input type="text" id="taskTitle" placeholder="عنوان کار" required />
+          <textarea id="taskDesc" placeholder="توضیحات (اختیاری)"></textarea>
+
+          <label for="taskDate">تاریخ:</label>
+          <select id="taskDate">
+            <option value="today">امروز</option>
+            <option value="tomorrow">فردا</option>
+            <option value="custom">تاریخ دلخواه</option>
+          </select>
+
+          <input type="date" id="customDate" class="hidden" />
+
+          <label for="taskTime">ساعت:</label>
+          <input type="time" id="taskTime" />
+
+          <button id="addTaskBtn">ثبت کار</button>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav id="bottomNav" class="bottom-nav">
+        <button class="nav-btn active" data-page="homePage">خانه</button>
+        <button class="nav-btn" data-page="notesPage">نوت ها</button>
+
+        <!-- Plus button centered -->
+        <button id="plusBtn" class="plus-btn">+</button>
+
+        <button class="nav-btn" data-page="settingsPage">تنظیمات</button>
+        <button class="nav-btn" data-page="profilePage">پروفایل</button>
+      </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
