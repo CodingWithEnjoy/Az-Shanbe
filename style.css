@@ -170,6 +170,7 @@ textarea {
 
 #todoList {
   margin-top: 50px;
+  margin-bottom: 80px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -350,6 +351,7 @@ textarea {
   gap: 10px;
   direction: rtl;
   padding: 32px 20px;
+  box-shadow: 0px 0px 20px 10px var(--primary);
 }
 
 .bottom-nav .nav-btn {
@@ -725,18 +727,30 @@ textarea {
   transform: scale(1);
 }
 
+#settingsPage h2 {
+  font-size: 30px;
+}
+
 .settings-buttons {
   display: flex;
   gap: 1rem;
-  margin-top: 50px;
-  justify-content: center;
+  margin-top: 10px;
+  justify-content: flex-start;
   flex-wrap: wrap;
+}
+
+.settings-buttons h3 {
+  font-weight: 600;
+  border-bottom: 1px solid #acacac;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 10px;
 }
 
 .settings-btn {
   padding: 13px 20px;
   width: 90%;
-  border-radius: 12px;
+  border-radius: 17px;
   background: #fff;
   color: #000;
   font-size: 18px;
@@ -746,6 +760,24 @@ textarea {
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
+}
+
+.setPassBtns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#removePasswordBtn {
+  width: 10%;
+  height: 57.2px;
+  background: var(--secondary);
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Slide panel container */
@@ -809,5 +841,84 @@ textarea {
 .image-options {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+#lockScreen {
+  position: fixed;
+  inset: 0;
+  background: var(--theme1, #111);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+
+  /* hidden state (don’t block clicks) */
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: transform 0.5s ease, opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+#lockScreen.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.lock-container {
+  text-align: center;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.dots span {
+  width: 12px;
+  height: 12px;
+  margin: 15px 5px;
+  border-radius: 50%;
+  background: gray;
+}
+
+.dots span.filled {
+  background: var(--secondary);
+}
+
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  gap: 13px;
+  justify-content: center;
+}
+
+.numpad button {
+  font-size: 24px;
+  width: 72px;
+  height: 70px;
+  border: none;
+  border-radius: 20px;
+  background: var(--secondary, #444);
+  color: white;
+  cursor: pointer;
+}
+
+#closeLockScreen {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  padding: 10px;
+  border: 1px solid #b4b4b4;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }

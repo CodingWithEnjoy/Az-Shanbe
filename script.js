@@ -589,6 +589,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "profiles/profile4.jpg",
     "profiles/profile5.jpg",
     "profiles/profile6.jpg",
+    "profiles/profile7.jpg",
+    "profiles/profile8.jpg",
+    "profiles/profile9.jpg",
+    "profiles/profile10.jpg",
   ];
   const defaultBannerImages = [
     "banners/banner1.jpg",
@@ -596,6 +600,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "banners/banner3.jpg",
     "banners/banner4.jpg",
     "banners/banner5.jpg",
+    "banners/banner6.jpg",
+    "banners/banner7.jpg",
+    "banners/banner8.jpg",
   ];
 
   // Open slide panel with specified content
@@ -701,5 +708,120 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((reg) => console.log("SW registered:", reg.scope))
         .catch((err) => console.error("SW registration failed:", err));
     });
+  }
+});
+
+const lockScreen = document.getElementById("lockScreen");
+const lockTitle = document.getElementById("lockTitle");
+const passwordDots = document.getElementById("passwordDots");
+const setPasswordBtn = document.getElementById("setPasswordBtn");
+const removePasswordBtn = document.getElementById("removePasswordBtn");
+const closeLockScreenBtn = document.getElementById("closeLockScreen");
+
+let inputPassword = "";
+let mode = "unlock"; // "unlock" | "set" | "confirm"
+let tempPassword = "";
+
+// Render dots
+function renderDots(len) {
+  passwordDots.innerHTML = "";
+  for (let i = 0; i < len; i++) {
+    const dot = document.createElement("span");
+    dot.classList.add("filled");
+    passwordDots.appendChild(dot);
+  }
+  for (let i = len; i < 4; i++) {
+    const dot = document.createElement("span");
+    passwordDots.appendChild(dot);
+  }
+}
+
+// Reset input
+function resetInput() {
+  inputPassword = "";
+  renderDots(0);
+}
+
+// Handle numpad clicks
+document.querySelectorAll(".numpad button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const num = btn.dataset.num;
+    const action = btn.dataset.action;
+
+    if (num) {
+      if (inputPassword.length < 4) {
+        inputPassword += num;
+        renderDots(inputPassword.length);
+      }
+    } else if (action === "del") {
+      inputPassword = inputPassword.slice(0, -1);
+      renderDots(inputPassword.length);
+    } else if (action === "ok") {
+      if (inputPassword.length !== 4) return;
+
+      if (mode === "unlock") {
+        const savedPass = localStorage.getItem("appPassword");
+        if (savedPass && inputPassword === savedPass) {
+          lockScreen.classList.remove("show"); // slide out
+          resetInput();
+        } else {
+          alert("رمز اشتباه است!");
+          resetInput();
+        }
+      } else if (mode === "set") {
+        tempPassword = inputPassword;
+        resetInput();
+        lockTitle.textContent = "رمز را دوباره وارد کنید";
+        mode = "confirm";
+      } else if (mode === "confirm") {
+        if (inputPassword === tempPassword) {
+          localStorage.setItem("appPassword", inputPassword);
+          alert("رمز با موفقیت تنظیم شد ✅");
+          lockScreen.classList.remove("show"); // slide out after setting
+          removePasswordBtn.classList.remove("hidden");
+        } else {
+          alert("رمزها مطابقت ندارند ❌");
+        }
+        resetInput();
+        mode = "unlock";
+        lockTitle.textContent = "رمز عبور را وارد کنید";
+      }
+    }
+  });
+});
+
+// On load, if password exists, show the lock screen with animation
+window.addEventListener("load", () => {
+  if (localStorage.getItem("appPassword")) {
+    mode = "unlock";
+    lockTitle.textContent = "رمز عبور را وارد کنید";
+    lockScreen.classList.add("show");
+    removePasswordBtn.classList.remove("hidden");
+  }
+});
+
+setPasswordBtn.addEventListener("click", () => {
+  mode = "set";
+  lockTitle.textContent = "یک رمز ۴ رقمی وارد کنید";
+  resetInput();
+  lockScreen.classList.add("show");
+  closeLockScreenBtn.classList.remove("hidden"); // show close button
+});
+
+// Close button only works for setting password
+closeLockScreenBtn.addEventListener("click", () => {
+  lockScreen.classList.remove("show");
+  resetInput();
+  mode = "unlock"; // reset mode
+  lockTitle.textContent = "رمز عبور را وارد کنید";
+  closeLockScreenBtn.classList.add("hidden"); // hide again
+});
+
+// Remove password
+removePasswordBtn.addEventListener("click", () => {
+  if (confirm("آیا مطمئن هستید که می‌خواهید رمز را حذف کنید؟")) {
+    localStorage.removeItem("appPassword");
+    alert("رمز حذف شد ❌");
+    removePasswordBtn.classList.add("hidden");
   }
 });

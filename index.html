@@ -58,6 +58,30 @@
       </div>
     </div>
 
+    <div id="lockScreen">
+      <button id="closeLockScreen" class="hidden">
+        <img src="icons/close.svg" alt="" />
+      </button>
+      <div class="lock-container">
+        <h2 id="lockTitle">رمز عبور را وارد کنید</h2>
+        <div id="passwordDots" class="dots"></div>
+        <div class="numpad">
+          <button data-num="1">1</button>
+          <button data-num="2">2</button>
+          <button data-num="3">3</button>
+          <button data-num="4">4</button>
+          <button data-num="5">5</button>
+          <button data-num="6">6</button>
+          <button data-num="7">7</button>
+          <button data-num="8">8</button>
+          <button data-num="9">9</button>
+          <button data-action="del">⌫</button>
+          <button data-num="0">0</button>
+          <button data-action="ok">✔</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Main App -->
     <div id="app" class="hidden">
       <!-- Pages -->
@@ -103,15 +127,27 @@
 
       <div id="settingsPage" class="page hidden">
         <h2>تنظیمات</h2>
-        <p>هر کاری دلت میخواد بکن.</p>
 
         <div class="settings-buttons">
+          <h3>پروفایل</h3>
           <button id="changeProfileBtn" class="settings-btn">
             <img src="icons/image.svg" alt="" /> تغییر عکس پروفایل
           </button>
           <button id="changeBannerBtn" class="settings-btn">
             <img src="icons/image.svg" alt="" /> تغییر بنر
           </button>
+
+          <h3>امنیت</h3>
+          <div class="setPassBtns">
+            <button id="setPasswordBtn" class="settings-btn">
+              <img src="icons/lock.svg" alt="" /> تنظیم رمز عبور
+            </button>
+            <button id="removePasswordBtn" class="settings-btn hidden">
+              <img src="icons/delete.svg" alt="" />
+            </button>
+          </div>
+
+          <h3>جنرالز</h3>
           <button id="btnAppearance" class="settings-btn">
             <img src="icons/settings.svg" alt="" /> ظاهر برنامه
           </button>
