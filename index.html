@@ -136,6 +136,9 @@
           <button id="changeBannerBtn" class="settings-btn">
             <img src="icons/image.svg" alt="" /> تغییر بنر
           </button>
+          <button id="editNameBtn" class="settings-btn">
+            <img src="icons/edit.svg" alt="" /> ویرایش نام
+          </button>
 
           <h3>امنیت</h3>
           <div class="setPassBtns">
@@ -154,6 +157,25 @@
           <button id="btnAbout" class="settings-btn">
             <img src="icons/info.svg" alt="" /> درباره برنامه
           </button>
+          <button id="logoutBtn" class="settings-btn">
+            <img src="icons/logout.svg" alt="" /> خروج
+          </button>
+        </div>
+
+        <!-- Edit Name Modal -->
+        <div id="editModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>ویرایش نام</h3>
+            <input
+              type="text"
+              id="newNameInput"
+              placeholder="نام جدید رو وارد کن"
+            />
+            <div class="modal-buttons">
+              <button id="saveNameBtn">ذخیره</button>
+              <button id="cancelEditBtn">لغو</button>
+            </div>
+          </div>
         </div>
 
         <div id="slidePanel" class="slide-panel hidden">
@@ -247,31 +269,6 @@
         </div>
 
         <h2 id="profileName"></h2>
-
-        <div class="profile-actions">
-          <button id="editNameBtn">
-            <img src="icons/edit.svg" alt="" /> ویرایش نام
-          </button>
-          <button id="logoutBtn">
-            <img src="icons/logout.svg" alt="" /> خروج
-          </button>
-        </div>
-
-        <!-- Edit Name Modal -->
-        <div id="editModal" class="modal hidden">
-          <div class="modal-content">
-            <h3>ویرایش نام</h3>
-            <input
-              type="text"
-              id="newNameInput"
-              placeholder="نام جدید رو وارد کن"
-            />
-            <div class="modal-buttons">
-              <button id="saveNameBtn">ذخیره</button>
-              <button id="cancelEditBtn">لغو</button>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Overlay for drawer -->
@@ -280,6 +277,7 @@
       <!-- Drawer container for task inputs -->
       <div id="taskDrawer" class="task-drawer hidden">
         <div class="drawer-content">
+          <div class="drawer-touch"></div>
           <h3>افزودن وظیفه جدید</h3>
           <input type="text" id="taskTitle" placeholder="عنوان کار" required />
           <textarea id="taskDesc" placeholder="توضیحات (اختیاری)"></textarea>

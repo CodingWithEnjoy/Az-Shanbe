@@ -40,6 +40,7 @@ body {
 
 html,
 body {
+  overscroll-behavior: none;
   scroll-behavior: smooth;
   height: 100%;
 }
@@ -397,6 +398,21 @@ textarea {
   user-select: none;
 }
 
+.drawer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.drawer-touch {
+  width: 60px;
+  height: 5px;
+  border-radius: 20px;
+  background: #c0c0c0;
+  margin-bottom: 15px;
+}
+
 .task-drawer {
   position: fixed;
   bottom: 0;
@@ -410,7 +426,7 @@ textarea {
   z-index: 1009;
   overflow-y: auto;
   padding: 15px;
-  border-radius: 20px 20px 0 0;
+  border-radius: 30px 30px 0 0;
 }
 
 .task-drawer h3 {
@@ -448,6 +464,11 @@ textarea {
 .task-drawer .drawer-content textarea {
   resize: none;
   height: 70px;
+}
+
+.task-drawer .drawer-content label {
+  width: 100%;
+  margin-bottom: 5px;
 }
 
 .task-drawer .drawer-content button {
@@ -521,10 +542,10 @@ textarea {
   height: auto;
   max-height: 90vh;
   z-index: 1001;
-  border-radius: 20px;
+  border-radius: 30px;
   background: transparent;
   padding: 0;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 .overlay2 {
@@ -735,16 +756,17 @@ textarea {
   display: flex;
   gap: 1rem;
   margin-top: 10px;
+  margin-bottom: 80px;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 .settings-buttons h3 {
   font-weight: 600;
-  border-bottom: 1px solid #acacac;
+  border-bottom: 1px solid #b8b8b8;
   width: 100%;
   padding: 10px 0;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .settings-btn {
