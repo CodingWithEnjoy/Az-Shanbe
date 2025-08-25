@@ -929,3 +929,50 @@ removePasswordBtn.addEventListener("click", () => {
     removePasswordBtn.classList.add("hidden");
   }
 });
+
+class RippleEffect {
+  /**
+   * @param {string} selector
+   */
+  constructor(selector) {
+    this.buttons = document.querySelectorAll(selector);
+    this.init();
+  }
+
+  /**
+   * @param {Event} event
+   * @param {HTMLElement} button
+   */
+  createRipple(event, button) {
+    const rect = button.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    const color =
+      button.getAttribute("data-color") || "rgba(180, 180, 180, 0.6)";
+    ripple.style.backgroundColor = color;
+
+    ripple.classList.add("ripple");
+    button.appendChild(ripple);
+
+    ripple.addEventListener("animationend", () => ripple.remove());
+  }
+
+  init() {
+    this.buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        this.createRipple(event, button);
+      });
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new RippleEffect(".ripple-button");
+});
