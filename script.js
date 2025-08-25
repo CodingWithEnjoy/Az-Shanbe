@@ -61,19 +61,33 @@ buttons.forEach((btn) => {
 
 window.startApp = function () {
   const name = document.getElementById("username").value.trim();
-  if (name === "") {
-    alert("لطفاً نام خود را وارد کنید!");
+  const userId = document.getElementById("userId").value.trim();
+  const userIdInput = document.getElementById("userId");
+
+  if (name === "" || userId === "") {
+    alert("لطفاً نام و یوزرنیم خود را وارد کنید!");
     return;
   }
+
+  if (!validateUsername(userIdInput)) {
+    alert("یوزرنیم فقط می‌تواند شامل حروف، اعداد، نقطه و زیرخط (_) باشد.");
+    return;
+  }
+
   localStorage.setItem("hasVisited", "true");
   localStorage.setItem("username", name);
+  localStorage.setItem("userId", userId);
+
   showApp();
 };
 
 function showApp() {
   welcome.classList.add("hidden");
   app.classList.remove("hidden");
+
   const name = localStorage.getItem("username") || "کاربر";
+  const userId = localStorage.getItem("userId") || "";
+
   userDisplay.textContent = name;
 
   const profileName = document.getElementById("profileName");
@@ -81,8 +95,29 @@ function showApp() {
     profileName.textContent = name;
   }
 
+  const profileUserId = document.getElementById("profileUserId");
+  if (profileUserId) {
+    profileUserId.textContent = userId ? `@${userId}` : "";
+  }
+
   loadTasks();
   updateProgressChartFromStorage();
+}
+
+function validateUsername(input) {
+  const regex = /^[a-zA-Z0-9._]+$/;
+  if (!regex.test(input.value.trim())) {
+    input.style.borderBottom = "1px solid #ff3535";
+    return false;
+  } else {
+    input.style.borderBottom = "1px solid rgb(147, 147, 147)";
+    return true;
+  }
+}
+
+const userIdInput = document.getElementById("userId");
+if (userIdInput) {
+  userIdInput.addEventListener("input", () => validateUsername(userIdInput));
 }
 
 const colorButtons = document.querySelectorAll(".color-btn");

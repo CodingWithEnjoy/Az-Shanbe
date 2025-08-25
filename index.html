@@ -2,7 +2,10 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Az Shanbe</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="shortcut icon" href="./logo.png" type="image/x-icon" />
@@ -51,6 +54,12 @@
               placeholder="اسم خودتو وارد کن"
               autocomplete="off"
             />
+            <input
+              type="text"
+              id="userId"
+              placeholder="یوزرنیم خودتو انتخاب کن"
+              autocomplete="off"
+            />
             <button onclick="startApp()">شروع</button>
           </div>
         </div>
@@ -89,7 +98,8 @@
         <div class="user-section">
           <p>سلام</p>
           <span id="userDisplay"></span>
-          <p>👋</p>
+
+          <img src="pepe.png" alt="" class="pepe" />
         </div>
 
         <div class="homeProgress">
@@ -130,34 +140,34 @@
 
         <div class="settings-buttons">
           <h3>پروفایل</h3>
-          <button id="changeProfileBtn" class="settings-btn">
+          <button id="changeProfileBtn" class="settings-btn first">
             <img src="icons/image.svg" alt="" /> تغییر عکس پروفایل
           </button>
           <button id="changeBannerBtn" class="settings-btn">
             <img src="icons/image.svg" alt="" /> تغییر بنر
           </button>
-          <button id="editNameBtn" class="settings-btn">
+          <button id="editNameBtn" class="settings-btn last">
             <img src="icons/edit.svg" alt="" /> ویرایش نام
           </button>
 
           <h3>امنیت</h3>
           <div class="setPassBtns">
-            <button id="setPasswordBtn" class="settings-btn">
+            <button id="setPasswordBtn" class="settings-btn pass">
               <img src="icons/lock.svg" alt="" /> تنظیم رمز عبور
             </button>
             <button id="removePasswordBtn" class="settings-btn hidden">
-              <img src="icons/delete.svg" alt="" />
+              <img src="icons/delete-light.svg" alt="" />
             </button>
           </div>
 
           <h3>جنرالز</h3>
-          <button id="btnAppearance" class="settings-btn">
+          <button id="btnAppearance" class="settings-btn first">
             <img src="icons/settings.svg" alt="" /> ظاهر برنامه
           </button>
           <button id="btnAbout" class="settings-btn">
             <img src="icons/info.svg" alt="" /> درباره برنامه
           </button>
-          <button id="logoutBtn" class="settings-btn">
+          <button id="logoutBtn" class="settings-btn last">
             <img src="icons/logout.svg" alt="" /> خروج
           </button>
         </div>
@@ -269,6 +279,7 @@
         </div>
 
         <h2 id="profileName"></h2>
+        <p id="profileUserId" class="username"></p>
       </div>
 
       <!-- Overlay for drawer -->

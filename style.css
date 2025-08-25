@@ -114,21 +114,22 @@ textarea {
 }
 
 .swiper-slide input {
-  width: 80%;
+  width: 90%;
   margin: 20px;
   outline: none;
-  border: 1px solid rgb(147, 147, 147);
-  border-radius: 100px;
-  padding: 15px 20px;
-  background: #cfcfcf;
+  border-bottom: 1px solid rgb(147, 147, 147);
+  padding: 15px 0;
+}
+
+#userId {
+  margin-top: -5px;
 }
 
 .swiper-slide button {
-  width: 15%;
-  margin: 0 20px;
+  width: 80%;
+  margin: 20px 20px;
   outline: none;
-  border: 1px solid #392182;
-  border-radius: 100px;
+  border-radius: 20px;
   padding: 10px 20px;
   background: var(--secondary);
   color: white;
@@ -334,6 +335,14 @@ textarea {
   color: var(--secondary);
   font-size: 28px;
   font-weight: 800;
+  margin-left: 100px;
+}
+
+.pepe {
+  width: 50px;
+  position: absolute;
+  left: 60px;
+  margin-bottom: -14px;
 }
 
 .bottom-nav {
@@ -509,6 +518,14 @@ textarea {
   text-align: center;
   margin-top: 60px;
   font-size: 26px;
+}
+
+#profileUserId {
+  direction: ltr;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -5px;
+  color: #5d5d5d;
 }
 
 .profileImage {
@@ -754,11 +771,10 @@ textarea {
 
 .settings-buttons {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   margin-top: 10px;
   margin-bottom: 80px;
-  justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .settings-buttons h3 {
@@ -766,22 +782,35 @@ textarea {
   border-bottom: 1px solid #b8b8b8;
   width: 100%;
   padding: 10px 0;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .settings-btn {
   padding: 13px 20px;
+  margin-top: -1px;
   width: 90%;
-  border-radius: 17px;
   background: #fff;
+  border: 1px solid #dadada;
   color: #000;
   font-size: 18px;
   cursor: pointer;
-  border: none;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
+}
+
+.settings-btn.first {
+  border-radius: 17px 17px 0 0;
+}
+
+.settings-btn.last {
+  border-radius: 0 0 17px 17px;
+}
+
+.settings-btn.pass {
+  border-radius: 17px;
 }
 
 .setPassBtns {
@@ -800,6 +829,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 17px;
 }
 
 /* Slide panel container */
