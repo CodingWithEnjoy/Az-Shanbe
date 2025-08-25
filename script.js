@@ -929,3 +929,14 @@ removePasswordBtn.addEventListener("click", () => {
     removePasswordBtn.classList.add("hidden");
   }
 });
+
+document.addEventListener(
+  "touchmove",
+  function (e) {
+    const scrollable = e.target.closest("body");
+    if (!scrollable) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
