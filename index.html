@@ -146,8 +146,11 @@
           <button id="changeBannerBtn" class="settings-btn">
             <img src="icons/image.svg" alt="" /> تغییر بنر
           </button>
-          <button id="editNameBtn" class="settings-btn last">
+          <button id="editNameBtn" class="settings-btn">
             <img src="icons/edit.svg" alt="" /> ویرایش نام
+          </button>
+          <button id="editUserIdBtn" class="settings-btn last">
+            <img src="icons/edit.svg" alt="" /> ویرایش یوزرنیم
           </button>
 
           <h3>امنیت</h3>
@@ -184,6 +187,21 @@
             <div class="modal-buttons">
               <button id="saveNameBtn">ذخیره</button>
               <button id="cancelEditBtn">لغو</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="editUserIdModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>ویرایش یوزرنیم</h3>
+            <input
+              type="text"
+              id="newUserIdInput"
+              placeholder="یوزرنیم جدید رو وارد کن"
+            />
+            <div class="modal-buttons">
+              <button id="saveUserIdBtn">ذخیره</button>
+              <button id="cancelUserIdEditBtn">لغو</button>
             </div>
           </div>
         </div>
@@ -260,8 +278,7 @@
 
           <div id="aboutContent" class="panel-content hidden">
             <h3>درباره برنامه</h3>
-            <p>نسخه برنامه: 1.0.0</p>
-            <p>این برنامه توسط تیم "از شنبه" ساخته شده است.</p>
+            <p>نسخه برنامه: 2.0.1</p>
           </div>
 
           <div id="imageSelectModal" class="panel-content hidden">

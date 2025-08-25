@@ -599,6 +599,75 @@ editModal.addEventListener("click", (event) => {
   }
 });
 
+const editUserIdBtn = document.getElementById("editUserIdBtn");
+const editUserIdModal = document.getElementById("editUserIdModal");
+const newUserIdInput = document.getElementById("newUserIdInput");
+const saveUserIdBtn = document.getElementById("saveUserIdBtn");
+const cancelUserIdEditBtn = document.getElementById("cancelUserIdEditBtn");
+
+// Show modal
+editUserIdBtn.addEventListener("click", () => {
+  newUserIdInput.value = localStorage.getItem("userId") || "";
+
+  editUserIdModal.classList.remove("hidden", "open");
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      editUserIdModal.classList.add("open");
+    });
+  });
+});
+
+// Cancel
+cancelUserIdEditBtn.addEventListener("click", () => {
+  editUserIdModal.classList.remove("open");
+  editUserIdModal.addEventListener("transitionend", function handler(e) {
+    if (e.propertyName === "opacity") {
+      editUserIdModal.classList.add("hidden");
+      editUserIdModal.removeEventListener("transitionend", handler);
+    }
+  });
+});
+
+// Save Username
+saveUserIdBtn.addEventListener("click", () => {
+  const newUserId = newUserIdInput.value.trim();
+  if (!newUserId) return alert("یوزرنیم نمی‌تواند خالی باشد!");
+
+  if (!/^[a-zA-Z0-9._]+$/.test(newUserId)) {
+    return alert(
+      "یوزرنیم فقط می‌تواند شامل حروف، اعداد، نقطه و زیرخط (_) باشد."
+    );
+  }
+
+  localStorage.setItem("userId", newUserId);
+
+  const profileUserId = document.getElementById("profileUserId");
+  if (profileUserId) {
+    profileUserId.textContent = `@${newUserId}`;
+  }
+
+  editUserIdModal.classList.remove("open");
+  editUserIdModal.addEventListener("transitionend", function handler(e) {
+    if (e.propertyName === "opacity") {
+      editUserIdModal.classList.add("hidden");
+      editUserIdModal.removeEventListener("transitionend", handler);
+    }
+  });
+});
+
+// Close modal on background click
+editUserIdModal.addEventListener("click", (event) => {
+  if (event.target === editUserIdModal) {
+    editUserIdModal.classList.remove("open");
+    editUserIdModal.addEventListener("transitionend", function handler(e) {
+      if (e.propertyName === "opacity") {
+        editUserIdModal.classList.add("hidden");
+        editUserIdModal.removeEventListener("transitionend", handler);
+      }
+    });
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   // Elements
   const btnAppearance = document.getElementById("btnAppearance");
