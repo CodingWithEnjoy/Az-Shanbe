@@ -41,7 +41,6 @@ body {
 html,
 body {
   overscroll-behavior: none;
-  scroll-behavior: smooth;
   height: 100%;
 }
 
