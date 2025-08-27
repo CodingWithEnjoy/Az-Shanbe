@@ -218,7 +218,7 @@ textarea {
 
 #taskInfo {
   height: 170px;
-  width: 190px;
+  width: 50%;
   font-size: 0.9rem;
   color: var(--text-color, #444);
   background: #fff;
@@ -259,7 +259,7 @@ textarea {
   background: #fff;
   border-radius: 30px;
   padding: 30px 20px;
-  width: 170px;
+  width: 50%;
   height: 170px;
   font-size: 20px;
   margin: auto;
@@ -997,4 +997,8 @@ textarea {
     transform: scale(4);
     opacity: 0;
   }
+}
+
+@media screen and (min-width: 600px) {
+
 }
