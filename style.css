@@ -465,7 +465,7 @@ textarea {
   font-size: 16px;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 17px;
   direction: rtl;
   text-align: right;
 }
@@ -485,7 +485,7 @@ textarea {
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 17px;
   font-weight: bold;
   transition: background-color 0.3s ease;
   user-select: none;
@@ -617,7 +617,7 @@ textarea {
 #noteForm textarea {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 17px;
   font-size: 16px;
   direction: rtl;
   text-align: right;
@@ -627,10 +627,11 @@ textarea {
   background: var(--secondary);
   color: white;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 17px;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
 }
 
 #notesList {
