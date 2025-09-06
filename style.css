@@ -4,7 +4,7 @@
 }
 
 :root {
-  --primary: var(--theme1); /* default set from primary themes */
+  --primary: var(--theme1);
   --secondary: #714dd9;
 
   --theme1: #ececec;
@@ -65,8 +65,6 @@ textarea {
   display: none !important;
 }
 
-/* Onboarding Screens */
-
 .swiper {
   width: 100%;
   height: 100vh;
@@ -77,7 +75,7 @@ textarea {
   flex: 1;
   width: 100vw;
   height: 100vh;
-  flex-shrink: 0; /* Prevent shrinking if in flex container */
+  flex-shrink: 0;
 }
 
 .swiper-slide {
@@ -147,8 +145,6 @@ textarea {
   width: 20px !important;
   border-radius: 100px !important;
 }
-
-/* App UI */
 
 #app {
   width: 100%;
@@ -289,7 +285,7 @@ textarea {
 
 .circular-progress #progressCircle {
   stroke: var(--secondary, #4caf50);
-  stroke-dasharray: 377; /* 2πr = 2 * π * 60 ≈ 377 */
+  stroke-dasharray: 377;
   stroke-dashoffset: 377;
   transition: stroke-dashoffset 0.5s ease;
 }
@@ -446,11 +442,9 @@ textarea {
   transform: translateY(0);
 }
 
-/* When hidden, slide it down */
 #taskDrawer.hidden {
   transform: translateY(100%);
   pointer-events: none;
-  /* do not use display:none */
 }
 
 .task-drawer .drawer-content input,
@@ -491,12 +485,10 @@ textarea {
   margin-top: 20px;
 }
 
-/* Show custom date input only when needed */
 #customDate.hidden {
   display: none !important;
 }
 
-/* Overlay styles for fade in/out */
 #overlay {
   position: fixed;
   inset: 0;
@@ -566,7 +558,7 @@ textarea {
 .overlay2 {
   position: fixed;
   inset: 0;
-  /* background: rgba(0, 0, 0, 0.8 ); */
+  background: rgba(0, 0, 0, 0.8);
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.3s ease;
@@ -634,6 +626,7 @@ textarea {
 
 #notesList {
   margin-top: 30px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -698,7 +691,6 @@ textarea {
   gap: 10px;
 }
 
-/* Modal styles */
 .modal {
   position: fixed;
   top: 0;
@@ -832,7 +824,6 @@ textarea {
   border-radius: 17px;
 }
 
-/* Slide panel container */
 .slide-panel {
   position: fixed;
   top: 0;
@@ -849,12 +840,10 @@ textarea {
   overflow-y: auto;
 }
 
-/* Show panel by sliding in */
 .slide-panel.show {
   transform: translateX(0);
 }
 
-/* Close button */
 .close-panel {
   padding: 7px;
   border: 1px solid #b4b4b4;
@@ -867,7 +856,6 @@ textarea {
   left: 20px;
 }
 
-/* Panel content */
 .panel-content {
   margin-top: 2.5rem;
 }
@@ -908,7 +896,6 @@ textarea {
   flex-direction: column;
   z-index: 9999;
 
-  /* hidden state (don’t block clicks) */
   transform: translateY(100%);
   opacity: 0;
   visibility: hidden;
@@ -998,6 +985,10 @@ textarea {
 }
 
 @media screen and (min-width: 1000px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     display: flex;
     align-items: center;
@@ -1041,6 +1032,6 @@ textarea {
     max-width: 500px;
     left: unset;
     right: unset;
-    border-radius: 17px 17px 0 0 ;
+    border-radius: 17px 17px 0 0;
   }
 }
