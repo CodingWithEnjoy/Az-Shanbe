@@ -522,13 +522,26 @@ textarea {
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .profileImage .banner {
   width: 100%;
-  height: 120px;
+  height: 200px;
   border-radius: 30px;
   object-fit: cover;
+}
+
+.profileImage .banner-overlay {
+  position: absolute;
+  margin-top: 2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  border-radius: 30px;
+  z-index: 1000;
+  background: linear-gradient(to bottom, transparent, #ececec);
 }
 
 .profileImage .profile {
@@ -536,7 +549,7 @@ textarea {
   height: 120px;
   background: var(--primary);
   padding: 7px;
-  top: 80px;
+  top: 140px;
   z-index: 1001;
   position: absolute;
   border-radius: 50%;
