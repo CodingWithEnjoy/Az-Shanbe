@@ -993,7 +993,7 @@ async function loadWeather() {
     // Current weather
     const current = data.current;
     tempEl.innerHTML = `${Math.round(current.temp.current)}°`;
-    emojiEl.innerHTML = `<img src="https://dasteaval.news/_ipx/q_80/images/weather/${current.weather.icon}.svg" alt="${current.weather.description}" width="30">`;
+    emojiEl.innerHTML = `<img src="https://openweathermap.org/payload/api/media/file/${current.weather.icon}.png" alt="${current.weather.description}" width="30">`;
 
     // Forecast
     forecastEl.innerHTML = "";
@@ -1001,7 +1001,7 @@ async function loadWeather() {
       const div = document.createElement("div");
       div.innerHTML = `
         <p>${day.dateTitle.replace(/[0-9۰-۹]/g, "")}</p>
-        <img src="https://cdn.weatherbit.io/static/img/icons/${day.weather.icon}.png" alt="${day.weather.description}" width="30">
+        <img src="https://openweathermap.org/payload/api/media/file/${day.weather.icon}.png" alt="${day.weather.description}" width="30">
         <p>${Math.round(day.temp.min)}° / ${Math.round(day.temp.max)}°</p>
       `;
       forecastEl.appendChild(div);
