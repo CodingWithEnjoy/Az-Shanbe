@@ -1001,7 +1001,7 @@ async function loadWeather() {
       const div = document.createElement("div");
       div.innerHTML = `
         <p>${day.dateTitle.replace(/[0-9۰-۹]/g, "")}</p>
-        <img src="https://dasteaval.news/_ipx/q_80/images/weather/${day.weather.icon}.svg" alt="${day.weather.description}" width="30">
+        <img src="https://cdn.weatherbit.io/static/img/icons/${day.weather.icon}.png" alt="${day.weather.description}" width="30">
         <p>${Math.round(day.temp.min)}° / ${Math.round(day.temp.max)}°</p>
       `;
       forecastEl.appendChild(div);
