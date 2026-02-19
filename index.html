@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Az Shanbe</title>
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Swiper CSS for onboarding slider -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Welcome / Onboarding Slider -->
+    <div id="welcome">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <img src="assets/img/1.webp" alt="" />
+            <h2>به "ازشنبه" خوش اومدی !</h2>
+            <p>
+              همه‌مون یه عالمه کار داریم، ولی همیشه می‌گیم: «از شنبه شروع
+              می‌کنم!» حالا وقتشه که این «شنبه» رو جدی بگیریم!
+            </p>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <img src="assets/img/1.webp" alt="" />
+            <h2>کارهات رو با ما بساز!</h2>
+            <p>
+              یه جای امن برای لیست کردن همه‌ی کارایی که مدام یادمون می‌ره. دیگه
+              لازم نیست استرس «فراموشی از شنبه» داشته باشی!
+            </p>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <img src="assets/img/1.webp" alt="" />
+            <h2>با «از شنبه» آسون‌تر می‌شی!</h2>
+            <p>
+              کارهات رو مدیریت کن و حس خوب انجام دادن رو تجربه کن. از شنبه دیگه
+              فقط یه بهونه نیست!
+            </p>
+          </div>
+
+          <!-- Slide 4: User inputs -->
+          <div class="swiper-slide">
+            <img src="assets/img/1.webp" alt="" />
+            <h2>اسم خودتو وارد کن و شروع کن!</h2>
+            <p>بی‌خیال بهونه‌ها، از شنبه شروع می‌کنیم!</p>
+
+            <!-- Username input -->
+            <input
+              type="text"
+              id="username"
+              placeholder="اسم خودتو وارد کن"
+              autocomplete="off"
+            />
+
+            <!-- UserId input -->
+            <input
+              type="text"
+              id="userId"
+              placeholder="یوزرنیم خودتو انتخاب کن"
+              autocomplete="off"
+            />
+
+            <!-- Start button -->
+            <button onclick="startApp()">شروع</button>
+          </div>
+        </div>
+
+        <!-- Pagination dots -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <!-- Lock Screen -->
+    <div id="lockScreen">
+      <!-- Close button (hidden by default) -->
+      <button id="closeLockScreen" class="hidden">
+        <img src="assets/icons/close.svg" alt="" />
+      </button>
+
+      <div class="lock-container">
+        <h2 id="lockTitle">رمز عبور را وارد کنید</h2>
+
+        <!-- Password dots -->
+        <div id="passwordDots" class="dots"></div>
+
+        <!-- Numeric keypad -->
+        <div class="numpad">
+          <button data-num="1">1</button>
+          <button data-num="2">2</button>
+          <button data-num="3">3</button>
+          <button data-num="4">4</button>
+          <button data-num="5">5</button>
+          <button data-num="6">6</button>
+          <button data-num="7">7</button>
+          <button data-num="8">8</button>
+          <button data-num="9">9</button>
+          <button data-action="del">⌫</button>
+          <button data-num="0">0</button>
+          <button data-action="ok">✔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="hidden">
+      <!-- Home Page -->
+      <div id="homePage" class="page active">
+        <!-- User Section -->
+        <div class="user-section">
+          <p>سلام</p>
+          <span id="userDisplay"></span>
+          <img src="assets/img/pepe.png" alt="" class="pepe" />
+        </div>
+
+        <!-- Progress Section -->
+        <div class="homeProgress">
+          <div id="progressContainer">
+            <div class="circular-progress">
+              <svg>
+                <circle cx="70" cy="70" r="60" />
+                <circle id="progressCircle" cx="70" cy="70" r="60" />
+              </svg>
+              <div class="progress-value" id="progressLabel">0%</div>
+            </div>
+          </div>
+
+          <!-- Task info -->
+          <div id="taskInfo">
+            <p id="pendingCount"></p>
+            <p id="taskMessage"></p>
+          </div>
+        </div>
+
+        <!-- Todo list container -->
+        <div id="todoList"></div>
+      </div>
+
+      <!-- Notes Page -->
+      <div id="notesPage" class="page hidden">
+        <h2>یادداشت‌ها</h2>
+        <p>اینجا می‌تونی یادداشت‌هات رو بنویسی و نگه داری.</p>
+
+        <!-- Note Form -->
+        <div id="noteForm">
+          <input type="text" id="noteTitle" placeholder="عنوان یادداشت" />
+          <textarea id="noteContent" placeholder="متن یادداشت..."></textarea>
+          <button id="saveNoteBtn">ثبت یادداشت</button>
+        </div>
+
+        <!-- Notes list -->
+        <div id="notesList"></div>
+      </div>
+
+      <!-- Settings Page -->
+      <div id="settingsPage" class="page hidden">
+        <h2>تنظیمات</h2>
+
+        <div class="settings-buttons">
+          <!-- Profile settings -->
+          <h3>پروفایل</h3>
+          <button
+            id="changeProfileBtn"
+            class="settings-btn ripple-button first"
+          >
+            <img src="assets/icons/image.svg" alt="" /> تغییر عکس پروفایل
+          </button>
+          <button id="changeBannerBtn" class="settings-btn ripple-button">
+            <img src="assets/icons/image.svg" alt="" /> تغییر بنر
+          </button>
+          <button id="editNameBtn" class="settings-btn ripple-button">
+            <img src="assets/icons/edit.svg" alt="" /> ویرایش نام
+          </button>
+          <button id="editUserIdBtn" class="settings-btn ripple-button last">
+            <img src="assets/icons/edit.svg" alt="" /> ویرایش یوزرنیم
+          </button>
+
+          <!-- Security settings -->
+          <h3>امنیت</h3>
+          <div class="setPassBtns">
+            <button id="setPasswordBtn" class="settings-btn ripple-button pass">
+              <img src="assets/icons/lock.svg" alt="" /> تنظیم رمز عبور
+            </button>
+            <button
+              id="removePasswordBtn"
+              class="settings-btn ripple-button hidden"
+            >
+              <img src="assets/icons/delete-light.svg" alt="" />
+            </button>
+          </div>
+
+          <!-- General settings -->
+          <h3>جنرالز</h3>
+          <button id="btnAppearance" class="settings-btn ripple-button first">
+            <img src="assets/icons/settings.svg" alt="" /> ظاهر برنامه
+          </button>
+          <button id="btnAbout" class="settings-btn ripple-button">
+            <img src="assets/icons/info.svg" alt="" /> درباره برنامه
+          </button>
+          <button id="logoutBtn" class="settings-btn ripple-button last">
+            <img src="assets/icons/logout.svg" alt="" /> خروج
+          </button>
+        </div>
+
+        <!-- Modals for editing name and userId -->
+        <div id="editModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>ویرایش نام</h3>
+            <input
+              type="text"
+              id="newNameInput"
+              placeholder="نام جدید رو وارد کن"
+            />
+            <div class="modal-buttons">
+              <button id="saveNameBtn">ذخیره</button>
+              <button id="cancelEditBtn">لغو</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="editUserIdModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>ویرایش یوزرنیم</h3>
+            <input
+              type="text"
+              id="newUserIdInput"
+              placeholder="یوزرنیم جدید رو وارد کن"
+            />
+            <div class="modal-buttons">
+              <button id="saveUserIdBtn">ذخیره</button>
+              <button id="cancelUserIdEditBtn">لغو</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide Panel for appearance/about/image selection -->
+        <div id="slidePanel" class="slide-panel hidden">
+          <button id="closePanelBtn" class="close-panel">
+            <img src="assets/icons/left.svg" alt="" />
+          </button>
+
+          <!-- Appearance settings -->
+          <div id="appearanceContent" class="panel-content hidden">
+            <h3>ظاهر برنامه</h3>
+            <div class="theme-picker">
+              <p>رنگ پس‌زمینه رو انتخاب کن:</p>
+              <div class="color-options">
+                <button
+                  class="color-btn"
+                  data-color="theme1"
+                  style="background: var(--theme1)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme2"
+                  style="background: var(--theme2)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme3"
+                  style="background: var(--theme3)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme4"
+                  style="background: var(--theme4)"
+                ></button>
+                <button
+                  class="color-btn"
+                  data-color="theme5"
+                  style="background: var(--theme5)"
+                ></button>
+              </div>
+            </div>
+
+            <div class="theme-picker">
+              <p>رنگ اصلی رو انتخاب کن:</p>
+              <div class="color-options">
+                <button
+                  class="secondary-btn"
+                  data-color="secondary1"
+                  style="background: var(--secondary1)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary2"
+                  style="background: var(--secondary2)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary3"
+                  style="background: var(--secondary3)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary4"
+                  style="background: var(--secondary4)"
+                ></button>
+                <button
+                  class="secondary-btn"
+                  data-color="secondary5"
+                  style="background: var(--secondary5)"
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- About panel -->
+          <div id="aboutContent" class="panel-content hidden">
+            <h3>درباره برنامه</h3>
+            <p>نسخه برنامه: 2.0.1</p>
+          </div>
+
+          <!-- Image selection panel -->
+          <div id="imageSelectModal" class="panel-content hidden">
+            <h3 id="imageSelectTitle">انتخاب تصویر</h3>
+            <div class="image-options" id="imageOptions"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Page -->
+      <div id="profilePage" class="page hidden">
+        <div class="profileImage">
+          <img src="assets/profiles/profile1.jpg" alt="" class="profile" />
+          <img src="assets/banners/banner1.jpg" alt="" class="banner" />
+          <div class="overlay2 hidden"></div>
+        </div>
+
+        <h2 id="profileName"></h2>
+        <p id="profileUserId" class="username"></p>
+
+        <!-- Weather Widget -->
+        <div id="weatherWidget" class="weather-widget hidden">
+          <div class="weather-current">
+            <div class="weather-temp" id="weatherTemp"></div>
+            <div class="weather-desc-emoji">
+              <p id="weatherEmoji" class="emoji"></p>
+            </div>
+          </div>
+          <div class="weather-forecast" id="weatherForecast"></div>
+        </div>
+
+        <!-- Currency / Crypto Widget -->
+        <div id="currencyWidget" class="currency-widget hidden">
+          <div class="currency-grid" id="currencyGrid"></div>
+        </div>
+      </div>
+
+      <!-- Overlay -->
+      <div id="overlay" class="hidden"></div>
+
+      <!-- Task Drawer -->
+      <div id="taskDrawer" class="task-drawer hidden">
+        <div class="drawer-content">
+          <div class="drawer-touch"></div>
+          <h3>افزودن وظیفه جدید</h3>
+          <input type="text" id="taskTitle" placeholder="عنوان کار" required />
+          <textarea id="taskDesc" placeholder="توضیحات (اختیاری)"></textarea>
+
+          <label for="taskDate">تاریخ:</label>
+          <select id="taskDate">
+            <option value="today">امروز</option>
+            <option value="tomorrow">فردا</option>
+            <option value="custom">تاریخ دلخواه</option>
+          </select>
+
+          <input type="date" id="customDate" class="hidden" />
+
+          <label for="taskTime">ساعت:</label>
+          <input type="time" id="taskTime" />
+
+          <button id="addTaskBtn">ثبت کار</button>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav id="bottomNav" class="bottom-nav">
+        <button class="nav-btn active" data-page="homePage">خانه</button>
+        <button class="nav-btn" data-page="notesPage">نوت ها</button>
+        <button id="plusBtn" class="plus-btn">+</button>
+        <button class="nav-btn" data-page="settingsPage">تنظیمات</button>
+        <button class="nav-btn" data-page="profilePage">پروفایل</button>
+      </nav>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
